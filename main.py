@@ -1,133 +1,101 @@
-#Практическое задание. №1
-print('Задание №1')
+#Задание №1
 '''
-Реализовать вывод информации о промежутке времени в зависимости от его продолжительности duration в секундах:
-до минуты: <s> сек;
-до часа: <m> мин <s> сек;
-до суток: <h> час <m> мин <s> сек;
-* в остальных случаях: <d> дн <h> час <m> мин <s> сек.
+Выяснить тип результата выражений:
+15 * 3
+15 / 3
+15 // 2
+15 ** 2
 '''
+print(type(15 * 3))
+print(type(15 / 3))
+print(type(15 // 2))
+print(type(15 ** 2))
 
-one_minute = 60
-one_hour = 3600
-one_day = 86400
-one_week = 604800
-one_month = 2629743
-one_year = 31556926
-
-duration = int(input('Укажите продолжительность в секундах: '))
-
-#Вывод информации до минуты:
-if duration < one_minute:
-    print('{} сек'.format(duration))
-#Вывод информации до часа:
-elif one_minute <= duration and one_hour > duration:
-    my_minute = duration // one_minute
-    my_second = duration % one_minute
-    print ('{} мин {} сек'.format(my_minute,my_second))
-#Вывод информации до суток:
-elif duration >= one_hour and duration < one_day:
-    my_hour = duration // one_hour
-    duration = duration % one_hour
-    my_minute = duration // one_minute
-    my_second = duration % one_minute
-    print('{} час {} мин {} сек'.format(my_hour,my_minute, my_second))
-#Выывод информации до недели
-elif duration >= one_day and duration < one_week:
-    my_day = duration // one_day
-    duration =duration % one_day
-    my_hour = duration // one_hour
-    duration = duration % one_hour
-    my_minute = duration // one_minute
-    my_second = duration % one_minute
-    print('{} дн {} час {} мин {} сек'.format(my_day,my_hour, my_minute, my_second))
-elif duration >= one_month and duration < one_year:
-    my_week = duration // one_week
-    duration = duration % one_week
-    my_day = duration // one_day
-    duration =duration % one_day
-    my_hour = duration // one_hour
-    duration = duration % one_hour
-    my_minute = duration // one_minute
-    my_second = duration % one_minute
-    print('{} нед {} дн {} час {} мин {} сек'.format(my_week,my_day, my_hour, my_minute, my_second))
-elif duration >= one_year:
-    my_year = duration // one_year
-    duration = duration % one_year
-    my_week = duration // one_week
-    duration = duration % one_week
-    my_day = duration // one_day
-    duration = duration % one_day
-    my_hour = duration // one_hour
-    duration = duration % one_hour
-    my_minute = duration // one_minute
-    my_second = duration % one_minute
-    print('{} год {} нед {} дн {} час {} мин {} сек'.format(my_year,my_week, my_day, my_hour, my_minute, my_second))
-
-
-print('Задание 2')
+#Задание №2
 '''
-Создать список, состоящий из кубов нечётных чисел от 1 до 1000 (куб X - третья степень числа X):
-1.Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7. Например, число «19 ^ 3 = 6859» будем включать в сумму, так как 6 + 8 + 5 + 9 = 28 – делится нацело на 7. Внимание: использовать только арифметические операции!
-2.К каждому элементу списка добавить 17 и заново вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7.
-* Решить задачу под пунктом b, не создавая новый список.
+Дан список:
+['в', '5', 'часов', '17', 'минут', 'температура', 'воздуха', 'была', '+5', 'градусов']
+
+Необходимо его обработать — обособить каждое целое число (вещественные не трогаем) кавычками (добавить кавычку до и кавычку после элемента списка, являющегося числом) и дополнить нулём до двух целочисленных разрядов:
+['в', '"', '05', '"', 'часов', '"', '17', '"', 'минут', 'температура', 'воздуха', 'была', '"', '+05', '"', 'градусов']
+
+Сформировать из обработанного списка строку:
+в "05" часов "17" минут температура воздуха была "+05" градусов
+
+Подумать, какое условие записать, чтобы выявить числа среди элементов списка? Как модифицировать это условие для чисел со знаком?
 '''
-#1. Вычислить сумму тех чисел из этого списка, сумма цифр которых делится нацело на 7. Например, число «19 ^ 3 = 6859» будем включать в сумму, так как 6 + 8 + 5 + 9 = 28 – делится нацело на 7.
-#создать список кубов нечётных чисел от 1 до 1000
-
-cubes = [x**3 for x in range (100) if x%2 !=0 ]
-print('Создан список кубов нечетных чисел {}'.format((cubes)))
-my_numbers_sum = 0
-my_numbers_sum_list=[]
-
-# итерация по списку
-for i in range(len(cubes)):
-    #print('---print cubes[i]', cubes[i])
-    my_str = str(cubes[i])
-    my_list = list(my_str)
-    #print('print my_lit', my_list)
-    for i in range(len(my_list)):
-        my_list[i] = int(my_list[i])
-    #Вычислить сумму чисел
-    '''
-    my_numbers_sum = sum(my_list)
-    print(my_numbers_sum)
-    '''
-    #Вычислить сумму чисел (вар. 2 )
-    for i in range(len(my_list)):
-        my_numbers_sum = my_numbers_sum + my_list[i]
-
-        #Условие, сумма чисел делится нацело на 7
-        if my_numbers_sum % 7 == 0:
-            print('Сумму чисел, делящихся на 7: ', my_numbers_sum)
-            my_numbers_sum_list.append(my_numbers_sum)
-
-print('Список чисел, делящихся на 7 (задание 1): ', my_numbers_sum_list)
-
-print('Задвние №3')
-
-'''
-Реализовать склонение слова «процент» во фразе «N процентов». 
-Вывести эту фразу на экран отдельной строкой для каждого из чисел в интервале от 1 до 100:
-1 процент
-2 процента
-3 процента
-4 процента
-5 процентов
-6 процентов
-...
-100 процентов
-'''
-
-for i in range(100):
-    new_str = str(i + 1)
-    new_list = list(new_str)
-    if int(new_list[-1])==1 and i + 1 != 11:
-        print('{] процент'.format(i + 1))
-    elif int(new_list[-1]) > 1 and int(new_list[-1]) <= 4:
-        if i + 1 > 10 and i + 1 <= 14:
-            print('{} процентов'.format(i + 1))
+my_list = ['в', '5', 'часов', '17', 'минут', 'температура', 'воздуха', 'была', '+5', 'градусов']
+new_list = []
+#для кажй строки исх. списка
+for item in my_list:
+    number = ''
+    diff1 = ''
+    diff2 = ''
+    #для каждого символа этой строки
+    for s in item:
+        if s in '1234567890':
+            number += s
         else:
-            print('{} процента'.format(i + 1))
+            if number:
+                diff2 += s
+            else:
+                diff1 += s
+    if not number:
+        new_list.append(item)
+        continue
+    number = f'{diff1}{int(number):02d}{diff2}'
+    new_list.append('"')
+    new_list.append(number)
+    new_list.append('"')
+print(new_list)
+res = ' '.join(new_list)
+print(res)
+res2 = ''
+i = 0
+while i < len(res):
+    if res[i] == '"' and i < len(res) - 3 and res[i + 1] == ' ' and res[i + 2] in '1234567890+-':
+        res2 += '"'
+        i += 1
+    elif res[i] =='"' and i > 1 and res[i-1] == ' ' and res[i - 2] in '1234567890':
+        res2 = res2[:-1] + '"'
     else:
-        print('{} процентов'.format(i + 1))
+        res2 += res[i]
+    i += 1
+print(res2)
+
+#задание №4
+'''
+Дан список, содержащий искажённые данные с должностями и именами сотрудников:
+['инженер-конструктор Игорь', 'главный бухгалтер МАРИНА', 'токарь высшего разряда нИКОЛАй', 'директор аэлита']
+
+Известно, что имя сотрудника всегда в конце строки. Сформировать и вывести на экран фразы вида: 'Привет, Игорь!'
+Подумать, как получить имена сотрудников из элементов списка, как привести их к корректному виду. Можно ли при этом не создавать новый список?
+'''
+my_list = ['инженер-конструктор Игорь', 'главный бухгалтер МАРИНА', 'токарь высшего разряда нИКОЛАй', 'Привет, Игорь']
+for item in my_list:
+    name = item.split()[-1].title()
+    print("Привет,", name)
+
+#задание №5
+'''
+Создать список, содержащий цены на товары (10–20 товаров), например:
+[57.8, 46.51, 97, ...]
+
+Вывести на экран эти цены через запятую в одну строку, цена должна отображаться в виде <r> руб <kk> коп (например «5 руб 04 коп»). Подумать, как из цены получить рубли и копейки, как добавить нули, если, например, получилось 7 копеек или 0 копеек (должно быть 07 коп или 00 коп).
+Вывести цены, отсортированные по возрастанию, новый список не создавать (доказать, что объект списка после сортировки остался тот же).
+Создать новый список, содержащий те же цены, но отсортированные по убыванию.
+Вывести цены пяти самых дорогих товаров. Сможете ли вывести цены этих товаров по возрастанию, написав минимум кода?
+'''
+prices = [57.8, 46.51, 97, 68.67, 73.94, 12.43, 28.56, 89.79, 32.45, 13.68, 43.23]
+new_list = []
+for price in prices:
+    roubles = int(price)
+    kop = round((price - roubles) * 100)
+    new_list.append(f"{roubles} руб {kop:0} коп")
+print(", ".join(new_list))
+id1 = id(prices)
+prices.sort()
+print(prices)
+print(id(prices) == id1)
+my_list = sorted(prices, reverse=True)
+print(sorted(my_list[:5]))
